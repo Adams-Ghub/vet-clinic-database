@@ -11,20 +11,27 @@ SELECT * FROM animals WHERE weight_kg>=10.4 AND weight_kg<=17.3;
 
 -- First transaction block of codes
 BEGIN;
-UPDATE animals SET species = 'unspecified';
+UPDATE animals 
+SET species = 'unspecified';
+SELECT species from animals; 
 ROLLBACK;
-COMMIT;
+SELECT species from animals;
+
 
 -- Second Transaction block of codes
 BEGIN;
 UPDATE animals SET species='digimon' WHERE name LIKE '%mon';
 UPDATE animals SET species ='pokemon' WHERE species IS NULL;
+SELECT species FROM animals;
 COMMIT;
+SELECT species FROM animals;
 
 -- Third Transaction block of codes
 BEGIN;
 DELETE FROM animals;
+SELECT COUNT(*) FROM animals;
 ROLLBACK;
+SELECT COUNT(*) FROM animals;
 COMMIT;
 
 -- Fourth Transaction block of codes
