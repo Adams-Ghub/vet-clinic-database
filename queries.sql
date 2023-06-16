@@ -66,3 +66,32 @@ GROUP BY species;
 
 -- What is the average number of escape attempts per animal type of those born between 1990 and 2000?
 SELECT AVG(escape_attempt) AS average_escape_attempt FROM animals WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
+
+-- what animals belong to Melody Pond
+SELECT name FROM animals JOIN owners ON animals.owner_id =owners.id WHERE owners.full_name='Melody Pond';
+
+-- All animals that are Pokemon
+SELECT animals.name FROM animals JOIN species ON animals.species_id =species.id WHERE species.name='Pokemon';
+
+-- All owners and their animals
+SELECT full_name, name FROM owners FULL JOIN animals ON owners.id = animals.owner_id;
+
+-- how many animals are there per species
+SELECT species.name,COUNT(*) 
+FROM animals 
+JOIN species ON animals.species_id=species.id 
+GROUP BY species.name;
+
+-- List of all Digimon owned by Jennifer Orwell
+SELECT animals.name 
+FROM animals JOIN owners ON animals.owner_id =owners.id 
+JOIN species ON animals.species_id=species.id 
+WHERE owners.full_name='Jennifer Orwell' 
+AND species.name='Digimon';
+
+-- List of all animals owned by Dean Wenchester that haven't tried to escape
+SELECT name
+FROM animals 
+JOIN owners ON animals.owner_id=owners.id 
+WHERE owners.full_name= 'Dean Winchester' 
+AND escape_attempt=0;
